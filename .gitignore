@@ -1,0 +1,39 @@
+# Python cache
+
+**pycache**/
+*.py[cod]
+
+# Virtual environments
+
+venv/
+env/
+.venv/
+.env/
+
+# Streamlit cache
+
+.streamlit/
+
+# Notebook checkpoints
+
+.ipynb_checkpoints/
+
+# Logs
+
+*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE settings
+
+.vscode/
+.idea/
+
+# Build files
+
+build/
+dist/
+*.egg-info/
