@@ -1,191 +1,192 @@
-# 🧠 Multi-Class Text Emotion Detection System
+# 🧠 EmotiSense AI
 
-> Classify text into 6 emotions with probability distribution, confidence scoring,
-> and sentiment analysis — powered by TF-IDF + Logistic Regression.
+### Multi-Class Text Emotion Detection System
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.32%2B-red)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+EmotiSense AI is a Natural Language Processing (NLP) based machine learning application that analyzes textual input and predicts the underlying emotion expressed in the text. The system classifies emotions into multiple categories such as **joy, sadness, anger, fear, love, and surprise** while also providing probability scores, confidence levels, and sentiment comparison.
+
+This project demonstrates the use of **TF-IDF feature extraction and Logistic Regression** for multi-class text classification, along with an interactive **Streamlit web application** for real-time emotion detection and visualization.
 
 ---
 
-## 📌 Project Overview
+## 🚀 Features
 
-| Property      | Details                                      |
-|---------------|----------------------------------------------|
-| **Task**      | Multi-class text classification              |
-| **Classes**   | joy 😄, sadness 😢, anger 😠, fear 😨, love ❤️, surprise 😲 |
-| **Model**     | Logistic Regression (multinomial)            |
-| **Features**  | TF-IDF (unigrams + bigrams, 50k features)    |
-| **Accuracy**  | ≥ 85% on dair-ai/emotion dataset             |
-| **Interface** | Streamlit web app with interactive charts    |
+* 📝 Detects emotions from user-input text
+
+* 😊 Supports **6 emotion classes**
+
+  * Joy
+  * Sadness
+  * Anger
+  * Fear
+  * Love
+  * Surprise
+
+* 📊 Displays **probability distribution** for each emotion
+
+* 🟢🟡🔴 Shows **confidence level** of predictions
+
+* 💬 Performs **sentiment analysis** (positive / negative / neutral)
+
+* 📈 Interactive **visualization charts** using Plotly
+
+* 🌐 User-friendly **Streamlit web interface**
 
 ---
 
-## 🗂️ Project Structure
+## 🛠️ Technologies Used
+
+* **Python**
+* **Natural Language Processing (NLP)**
+* **Scikit-learn**
+* **TF-IDF Vectorization**
+* **Logistic Regression**
+* **Streamlit**
+* **Plotly**
+* **Pandas & NumPy**
+
+---
+
+## 📂 Project Structure
 
 ```
-emotion_detection/
+HexSoftwares_EmotiSenseAI
 │
-├── data/                      ← Dataset files (train.txt, val.txt, test.txt)
-├── models/                    ← Saved model artifacts (auto-created)
-│   ├── emotion_pipeline.pkl
-│   ├── tfidf_vectorizer.pkl
-│   ├── lr_classifier.pkl
-│   └── label_classes.pkl
-├── assets/                    ← Generated plots (auto-created)
-│   ├── confusion_matrix.png
-│   └── class_distribution.png
-│
-├── app.py                     ← Streamlit web application
-├── train_model.py             ← Training script
-├── predict.py                 ← CLI prediction utility
-├── download_dataset.py        ← One-time dataset downloader
+├── app.py
+├── train_model.py
+├── predict.py
+├── download_dataset.py
 ├── requirements.txt
-└── README.md
+├── README.md
+│
+├── data/
+│   ├── train.txt
+│   ├── val.txt
+│   └── test.txt
+│
+├── models/
+│   └── emotion_pipeline.pkl
+│
+└── assets/
 ```
 
 ---
 
-## ⚡ Quick Start
+## ⚡ Installation
 
-### 1. Install dependencies
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/HexSoftwares_EmotiSenseAI.git
+cd HexSoftwares_EmotiSenseAI
+```
+
+Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Download the dataset
+---
+
+## 📥 Download Dataset
+
+Run the dataset download script:
+
 ```bash
 python download_dataset.py
 ```
-This downloads the [dair-ai/emotion](https://huggingface.co/datasets/dair-ai/emotion)
-dataset (~16k training samples, 2k val, 2k test) into `data/`.
 
-> **No internet?** Skip this step — `train_model.py` falls back to a built-in
-> synthetic dataset automatically (lower accuracy, good for testing).
+This downloads the **dair-ai/emotion dataset** used for training the model.
 
-### 3. Train the model
+---
+
+## 🧠 Train the Model
+
 ```bash
 python train_model.py
 ```
-- Trains TF-IDF + Logistic Regression pipeline
-- Saves model to `models/`
-- Saves evaluation plots to `assets/`
-- Prints accuracy & classification report
 
-### 4. Launch the web app
+This will:
+
+* Train the TF-IDF + Logistic Regression model
+* Generate evaluation metrics
+* Save the trained model in the **models/** folder
+
+---
+
+## 🌐 Run the Web Application
+
 ```bash
 streamlit run app.py
 ```
-Open http://localhost:8501 in your browser.
 
-### 5. CLI prediction (optional)
-```bash
-python predict.py "I am so happy today!"
-python predict.py   # interactive mode
+Open the link shown in the terminal (usually):
+
+```
+http://localhost:8501
 ```
 
----
-
-## 🎯 Features
-
-### Web App (app.py)
-- 📝 **Text input** — type or paste any text
-- 😄 **Emotion prediction** with emoji display
-- 📊 **Probability bar chart** (Plotly, all 6 classes)
-- 🟢🟡🔴 **Confidence indicator** (High / Medium / Low)
-- 💬 **Sentiment analysis** (rule-based positive/negative/neutral)
-- ✅ **Sentiment vs emotion comparison**
-- 💡 **Example sentences** for quick testing
-
-### Training Pipeline
-- Text cleaning (lowercase, URL removal, special chars)
-- TF-IDF vectorization (unigrams + bigrams, sublinear TF)
-- Logistic Regression with multinomial solver
-- scikit-learn Pipeline (vectorizer + classifier in one object)
-- Confusion matrix & class distribution plots
-- Model persistence via pickle
+Then enter text to detect emotions.
 
 ---
 
-## 📊 Model Performance (dair-ai/emotion dataset)
+## 🎯 Example
 
-| Emotion  | Precision | Recall | F1-Score |
-|----------|-----------|--------|----------|
-| joy      | 0.88      | 0.91   | 0.89     |
-| sadness  | 0.91      | 0.93   | 0.92     |
-| anger    | 0.87      | 0.84   | 0.85     |
-| fear     | 0.88      | 0.86   | 0.87     |
-| love     | 0.87      | 0.82   | 0.84     |
-| surprise | 0.83      | 0.85   | 0.84     |
-| **avg**  | **0.87**  | **0.87** | **0.87** |
+**Input**
 
-> Results with full dair-ai/emotion dataset (~16k samples).
-
----
-
-## 🗓️ 6-Day Implementation Plan
-
-| Day | Task |
-|-----|------|
-| 1   | Setup env, install deps, understand dataset |
-| 2   | Data preprocessing + EDA |
-| 3   | Train & evaluate model, tune hyperparameters |
-| 4   | Build Streamlit UI (basic) |
-| 5   | Add charts, sentiment analysis, polish UI |
-| 6   | Testing, README, GitHub push |
-
----
-
-## 🔧 Hyperparameter Tuning
-
-To experiment with hyperparameters, modify `train_model.py`:
-
-```python
-# TF-IDF options
-TfidfVectorizer(
-    max_features=50000,   # try: 30000, 70000
-    ngram_range=(1, 2),   # try: (1,1), (1,3)
-    sublinear_tf=True,    # log-scaled TF
-    min_df=2,             # minimum document frequency
-)
-
-# Logistic Regression options
-LogisticRegression(
-    C=5.0,                # try: 1.0, 10.0
-    max_iter=1000,
-    solver="lbfgs",
-)
+```
+I am extremely excited about this new opportunity!
 ```
 
----
+**Output**
 
-## 📦 Dataset
+```
+Emotion: Joy 😄
+Confidence: High
+Sentiment: Positive
+```
 
-**dair-ai/emotion** on HuggingFace  
-- 16,000 English Twitter messages
-- 6 emotion labels: sadness, joy, love, anger, fear, surprise
-- Pre-split: train (16k) / val (2k) / test (2k)
-
----
-
-## 🚀 Deployment (Streamlit Cloud)
-
-1. Push repo to GitHub
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Connect your repo, set `app.py` as entry point
-4. Add `models/` files to the repo (or use Git LFS)
-5. Deploy!
+The application also displays a **probability chart** showing the likelihood of each emotion.
 
 ---
 
-## 🤝 Contributing
+## 📊 Dataset
 
-Pull requests welcome! For major changes, open an issue first.
+This project uses the **dair-ai/emotion dataset** from HuggingFace which contains thousands of labeled text samples for emotion classification.
+
+Emotion classes include:
+
+* joy
+* sadness
+* anger
+* fear
+* love
+* surprise
 
 ---
 
-## 📄 License
+## 📌 Future Improvements
 
-MIT License — free to use, modify, and distribute.
+* Deep Learning models (LSTM / Transformers)
+* Emotion detection from speech
+* Real-time social media emotion analysis
+* API deployment for integration with other applications
+
+---
+
+## 📜 License
+
+This project is open-source and available under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+**Pranav Anand**
+
+AI / Machine Learning Enthusiast
+MSc Artificial Intelligence, Machine Learning & Data Science
+
+---
+
+⭐ If you like this project, feel free to **star the repository**.
